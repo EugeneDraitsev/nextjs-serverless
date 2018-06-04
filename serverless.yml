@@ -4,9 +4,12 @@ provider:
   name: aws
   runtime: nodejs8.10
   memorySize: 256
+  stage: prod
+  region: eu-central-1
   timeout: 15
   environment:
     NODE_ENV: production
+    BASE_URL: ${opt:stage, ''}
 
 functions:
   next:
@@ -25,9 +28,3 @@ package:
 
 plugins:
   - serverless-offline
-  - serverless-apigw-binary
-
-custom:
-  apigwBinary:
-    types:
-      - '*/*'

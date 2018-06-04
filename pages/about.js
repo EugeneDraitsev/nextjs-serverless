@@ -1,9 +1,13 @@
 import React from 'react'
+import Link from 'next/link'
+import getConfig from 'next/config'
 
-export default () =>
+const prefix = getConfig().publicRuntimeConfig.basePath || ''
+
+export default () => (
   <div>
-    About
-    <a href="/"> index </a>
+    <div>About</div>
+    <Link href={`${prefix}/index`}>to index</Link>
   </div>
-
+)
 

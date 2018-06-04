@@ -9,6 +9,9 @@ exports.handler = (evt, ctx, callback) => {
   app.prepare()
     .then(() => {
       const server = express()
+      const router = express.Router()
+      router.get('*', (req, res) => handle(req, res))
+      server.use('/prod', router)
 
       server.get('*', (req, res) => {
         return handle(req, res)
