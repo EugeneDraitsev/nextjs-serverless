@@ -1,10 +1,10 @@
 {
   "scripts": {
     "start": "next build && serverless offline start",
-    "dev": "node server.js",
+    "dev": "next dev",
     "build": "next build",
-    "next-start": "next start",
-    "deploy-function": "next build && sls deploy function --function next --verbose"
+    "deploy": "next build && sls deploy",
+    "deploy:function": "next build && sls deploy function --function next --verbose"
   },
   "dependencies": {
     "express": "^4.16.3",
