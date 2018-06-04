@@ -1,0 +1,33 @@
+service: nextjs-testing
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  memorySize: 256
+  timeout: 15
+  environment:
+    NODE_ENV: production
+
+functions:
+  next:
+    handler: index.handler
+    events:
+      - http:
+          path: /
+          method: ANY
+      - http:
+          path: /{any+}
+          method: ANY
+
+package:
+  include:
+    - .next/**
+
+plugins:
+  - serverless-offline
+  - serverless-apigw-binary
+
+custom:
+  apigwBinary:
+    types:
+      - '*/*'
