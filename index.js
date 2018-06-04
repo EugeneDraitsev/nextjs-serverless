@@ -5,17 +5,17 @@ const next = require('next')
 const app = next({ dev: false })
 const handle = app.getRequestHandler()
 
-function createServer() {
-  const server = express()
+exports.handler = (evt, ctx, callback) => {
+  app.prepare()
+    .then(() => {
+      const server = express()
 
-  server.get('*', (req, res) => {
-    // return app.render(req, res, req.url, req.query)
-    return handle(req, res)
-  })
+      server.get('*', (req, res) => {
+        return handle(req, res)
+      })
 
-  return server
+      const handler = serverless(server)
+      return handler(evt, ctx, callback)
+    })
 }
 
-const appServer = createServer()
-const handler = serverless(appServer)
-exports.handler = (evt, ctx, callback) => handler(evt, ctx, callback)
