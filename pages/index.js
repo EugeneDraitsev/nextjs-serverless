@@ -11,4 +11,3 @@ export default () => (
     <Link href={`${prefix}/about`}><a>to about</a></Link>
   </div>
 )
-
